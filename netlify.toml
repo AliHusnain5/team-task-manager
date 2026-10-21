@@ -1,0 +1,19 @@
+[build]
+  base = "client"
+  command = "npm run build"
+  publish = "dist"
+
+# Proxy API calls to the Railway backend. The browser only ever talks to the
+# Netlify domain, so the session cookie stays first-party (no CORS or
+# third-party-cookie problems). Replace the URL with your Railway backend URL.
+[[redirects]]
+  from = "/api/*"
+  to = "https://YOUR-BACKEND.up.railway.app/api/:splat"
+  status = 200
+  force = true
+
+# Single-page app fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
